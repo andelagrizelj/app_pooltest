@@ -55,7 +55,7 @@ class _LoginPage extends State<LoginPage> {
   TextEditingController _telefonController = TextEditingController();
   TextEditingController _klasseController = TextEditingController();
 
-  void createUser() async {
+  Future createUser() async {
     var url = "http://10.0.2.2:8080/api/createTeilnehmer";
 
     Map data={
@@ -172,13 +172,15 @@ class _LoginPage extends State<LoginPage> {
               ),
               //disabeln kann man wenn hier null steht
               onPressed: () {
-                createUser();
-                Navigator.pushAndRemoveUntil(
+                createUser().then((value) =>
+                  Navigator.pushAndRemoveUntil(
                   context,
                   PageTransition(
                       child: Homepage(),
                       type: PageTransitionType.rightToLeft),
                       (route) => false,
+
+                )
                 );
               },
               child: const Text('Weiter'),
