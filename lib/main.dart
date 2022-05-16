@@ -172,7 +172,7 @@ class _LoginPage extends State<LoginPage> {
               ),
               //disabeln kann man wenn hier null steht
               onPressed: () {
-                createUser().then((value) =>
+                //createUser().then((value) =>
                   Navigator.pushAndRemoveUntil(
                   context,
                   PageTransition(
@@ -180,8 +180,8 @@ class _LoginPage extends State<LoginPage> {
                       type: PageTransitionType.rightToLeft),
                       (route) => false,
 
-                )
                 );
+                //);
               },
               child: const Text('Weiter'),
             ),

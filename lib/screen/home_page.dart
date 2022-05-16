@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:page_transition/page_transition.dart';
 import 'dart:async';
 import 'dart:convert';
+
+import './calendar.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -27,22 +30,22 @@ class _Homepage extends State<Homepage> {
     print(data["vorname"]);
 
     setState(() {
-      _userDaten=data;
+      //_userDaten=data;
     });
   }
-
+/*
   @override
   void initState(){
     super.initState();
     getData();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Willkommen "+_userDaten["vorname"]),
+          title: Text("Willkommen "),
         ),
         body: Center(
           child: Column(
@@ -55,7 +58,7 @@ class _Homepage extends State<Homepage> {
                 width: 300.0,
                 height: 200.0,
                 alignment: Alignment.topLeft,
-                child: Text("Willkommen "+_userDaten["vorname"]+"!"+"\nWas möchtest du tun?",
+                child: Text("Willkommen!"+"\nWas möchtest du tun?",
                     style: Theme
                         .of(context)
                         .textTheme
@@ -73,7 +76,16 @@ class _Homepage extends State<Homepage> {
                   ),
                 ),
                 //disabeln kann man wenn hier null steht
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                  context,
+                  PageTransition(
+                      child: TableEventsExample(),
+                      type: PageTransitionType.rightToLeft),
+                      (route) => false,
+
+                  );
+                },
                 child: const Text('Termin buchen'),
               ),
               const SizedBox(height: 30),
@@ -86,7 +98,9 @@ class _Homepage extends State<Homepage> {
                     fontSize: 25,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 child: const Text('Termin einsehen'),
               ),
               const SizedBox(height: 30),
